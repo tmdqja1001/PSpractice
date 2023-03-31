@@ -3,15 +3,11 @@
 
 using namespace std;
 
+int map[100][100];
+
 int solution(int m, int n, vector<vector<int>> puddles) {
     int answer = 0;
     // n : 행, m : 열
-    int map[n][m];
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            map[i][j] = 0;
-        }
-    }
     for(auto p : puddles){
         map[p[1]-1][p[0]-1] = -1;
     }
