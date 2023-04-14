@@ -26,20 +26,9 @@ void initialize(void){
     //while(!bfsq.empty()) bfsq.pop();
 }
 
-void print(void){
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            cout << space[i][j] << ' ';
-        }
-        cout << '\n';
-    }
-    cout << shark_size << '\n';
-    cout << time << "s" << '\n';
-}
 
 int BFS(void){
     initialize();
-    //print();
     bfsq.push({pos_r, pos_c});
     int next_r, next_c;
     int min_r = 20;
@@ -62,7 +51,12 @@ int BFS(void){
             visited[next_r][next_c] = visited[row][col] + 1;
             int fish_size = space[next_r][next_c];
             if(fish_size != 0 && fish_size < shark_size){
-                if(eat_fish && ret < visited[next_r][next_c]) break;
+                if(eat_fish && ret < visited[next_r][next_c]){
+                    while(!bfsq.empty()){
+                        bfsq.pop();
+                    }
+                    break;
+                }
 
                 eat_fish = true;
                 ret = visited[next_r][next_c];
