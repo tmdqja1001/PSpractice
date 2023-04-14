@@ -62,7 +62,7 @@ int BFS(void){
             visited[next_r][next_c] = visited[row][col] + 1;
             int fish_size = space[next_r][next_c];
             if(fish_size != 0 && fish_size < shark_size){
-                if(eat_fish && ret < visited[next_r][next_c]) continue;
+                if(eat_fish && ret < visited[next_r][next_c]) break;
 
                 eat_fish = true;
                 ret = visited[next_r][next_c];
