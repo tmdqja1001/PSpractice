@@ -23,7 +23,7 @@ void initialize(void){
             visited[i][j] = 0;
         }
     }
-    while(!bfsq.empty()) bfsq.pop();
+    //while(!bfsq.empty()) bfsq.pop();
 }
 
 void print(void){
@@ -40,8 +40,8 @@ void print(void){
 int BFS(void){
     initialize();
     //print();
-    bfsq.push({pos_r, pos_c, 1});
-    int next_r, next_c, next_e;
+    bfsq.push({pos_r, pos_c});
+    int next_r, next_c;
     int min_r = 20;
     int min_c = 20;
     int ret;
@@ -49,14 +49,11 @@ int BFS(void){
     while(!bfsq.empty()){
         int row = bfsq.front()[0];
         int col = bfsq.front()[1];
-        int ena = bfsq.front()[2];
         bfsq.pop();
 
         for(int i=0; i<4; i++){
             next_r = row + direction[i][0];
             next_c = col + direction[i][1];
-            next_e = ena + 1;
-            if(i == 3) next_e = 1;
             if(next_r < 0 || next_r >= n) continue;
             if(next_c < 0 || next_c >= n) continue; // out of map
             if(visited[next_r][next_c] != 0) continue; // visited
@@ -80,7 +77,7 @@ int BFS(void){
                 }
             }
             else{
-                bfsq.push({next_r, next_c, next_e});
+                bfsq.push({next_r, next_c});
             }
         }
     }
