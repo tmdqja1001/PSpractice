@@ -3,12 +3,15 @@
 #include <string.h>
 using namespace std;
 
-#define fastio ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+#define fastio ios::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+
 
 int main(void){
     fastio;
     int n;
-    bool s[20] = { 0 };
+    int s = 0;
+    int zero = 0;
+    int ffff = ~zero;
     cin >> n;
     string op;
     int x;
@@ -16,25 +19,31 @@ int main(void){
         cin >> op;
         if(op == "add"){
             cin >> x;
-            s[x-1] = 1;
+            x = (1 << x);
+            s |= x;
         }
         else if(op == "remove"){
             cin >> x;
-            s[x-1] = 0;
+            x = (1 << x);
+            x = ~x;
+            s &= x;
         }
         else if(op == "check"){
             cin >> x;
-            cout << s[x-1] << '\n';
+            int temp = (s >> x);
+            temp &= 1;
+            cout << temp << '\n';
         }
         else if(op == "toggle"){
             cin >> x;
-            s[x-1] = !s[x-1];
+            x = (1 << x);
+            s ^= x;
         }
         else if(op == "all"){
-            memset(s, 1, 20 * sizeof(bool));
+            s |= ffff;
         }
         else if(op == "empty"){
-            memset(s, 0, 20 * sizeof(bool));
+            s &= zero;
         }
     }
 }
