@@ -10,8 +10,6 @@ int main(void){
     fastio;
     int n;
     int s = 0;
-    int zero = 0;
-    int ffff = ~zero;
     cin >> n;
     string op;
     int x;
@@ -19,14 +17,11 @@ int main(void){
         cin >> op;
         if(op == "add"){
             cin >> x;
-            x = (1 << x);
-            s |= x;
+            s |= (1 << x);
         }
         else if(op == "remove"){
             cin >> x;
-            x = (1 << x);
-            x = ~x;
-            s &= x;
+            s &= ~(1 << x);
         }
         else if(op == "check"){
             cin >> x;
@@ -36,14 +31,13 @@ int main(void){
         }
         else if(op == "toggle"){
             cin >> x;
-            x = (1 << x);
-            s ^= x;
+            s ^= (1 << x);
         }
         else if(op == "all"){
-            s |= ffff;
+            s |= ~0;
         }
         else if(op == "empty"){
-            s &= zero;
+            s &= 0;
         }
     }
 }
