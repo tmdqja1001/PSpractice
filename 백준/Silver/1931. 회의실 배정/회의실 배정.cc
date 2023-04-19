@@ -14,6 +14,7 @@ bool compare(pair<int, int> a, pair<int, int> b){
 }
 
 int main(void){
+    fastio;
     int n;
     cin >> n;
     for(int i=0; i<n; i++){
