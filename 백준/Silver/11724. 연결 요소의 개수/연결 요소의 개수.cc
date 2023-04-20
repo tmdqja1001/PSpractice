@@ -1,24 +1,26 @@
 #include <iostream>
 #include <queue>
-#include <vector>
+
 using namespace std;
 
 #define fastio ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
 #define MAX 1000
 
 int n, m, cnt;
-vector<int> graph[MAX];
+bool graph[MAX][MAX];
 bool visited[MAX];
 queue<int> bfsq;
 
 void BFS(int a){        //start at 0
+    bfsq.push(a);
     while(!bfsq.empty()){
         int temp = bfsq.front();
+        visited[temp] = 1;
         bfsq.pop();
-        for(int i=0; i<graph[temp].size(); i++){
-            if(!visited[graph[temp][i]]){
-                visited[graph[temp][i]] = 1;
-                bfsq.push(graph[temp][i]);
+        for(int i=0; i<n; i++){
+            if(graph[temp][i] && !visited[i]){
+                visited[i] = 1;
+                bfsq.push(i);
             }
         }
     }
@@ -32,15 +34,11 @@ int main(void){
     int a, b;
     for(int i=0; i<m; i++){
         cin >> a >> b;
-        graph[a-1].push_back(b-1);
-        graph[b-1].push_back(a-1);
+        graph[a-1][b-1] = 1;        // -1 for start at 1
+        graph[b-1][a-1] = 1;
     }
     for(int i=0; i<n; i++){
-        if(!visited[i]){
-            bfsq.push(i);
-            visited[i] = true;
-            BFS(i);
-        }
+        if(!visited[i]) BFS(i);
     }
     cout << cnt;
 
