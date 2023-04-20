@@ -1,47 +1,47 @@
-#include <bits/stdc++.h>
-
+#include <iostream>
+#include <queue>
+#include <vector>
 using namespace std;
 
-int n,m,a,b,ans=0;
-bool visited[1001];
-vector <int> v[1001];
-queue <int> q;
+#define fastio ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+#define MAX 1000
 
-void bfs(int a)
-{
-    ans+=1;
-    while(!q.empty())
-    {
-        a=q.front();
-        q.pop();
-        for(int i=0;i<v[a].size();i++)
-        {
-            if(visited[v[a][i]]==false)
-            {
-                q.push(v[a][i]);
-                visited[v[a][i]]=true;
+int n, m, cnt;
+vector<int> graph[MAX];
+bool visited[MAX];
+queue<int> bfsq;
+
+void BFS(int a){        //start at 0
+    while(!bfsq.empty()){
+        int temp = bfsq.front();
+        bfsq.pop();
+        for(int i=0; i<graph[temp].size(); i++){
+            if(!visited[graph[temp][i]]){
+                visited[graph[temp][i]] = 1;
+                bfsq.push(graph[temp][i]);
             }
         }
     }
+    cnt++;
+    return;
 }
 
-int main()
-{
+int main(void){
+    //fastio;
     cin >> n >> m;
-    for(int i=0;i<m;i++)
-    {
+    int a, b;
+    for(int i=0; i<m; i++){
         cin >> a >> b;
-        v[a].push_back(b);
-        v[b].push_back(a);
+        graph[a-1].push_back(b-1);
+        graph[b-1].push_back(a-1);
     }
-    for(int i=1;i<=n;i++)
-    {
-        if(visited[i]==false)
-        {
-            q.push(i);
-            visited[i]=true;
-            bfs(i);
+    for(int i=0; i<n; i++){
+        if(!visited[i]){
+            bfsq.push(i);
+            visited[i] = true;
+            BFS(i);
         }
     }
-    cout << ans;
+    cout << cnt;
+
 }
