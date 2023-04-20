@@ -27,7 +27,7 @@ void BFS(int a){        //start at 0
 }
 
 int main(void){
-    //fastio;
+    fastio;
     cin >> n >> m;
     int a, b;
     for(int i=0; i<m; i++){
