@@ -12,26 +12,17 @@ int main(void){
     cin >> n;
     int curR, curG, curB;
     int minR, minG, minB;
-    int temR, temG, temB;
-    int ret;
 
     for(int i=0; i<n; i++){
         cin >> curR >> curG >> curB;
         if(i){
-            temR = curR + min(minG, minB);
-            temB = curB + min(minR, minG);
-            temG = curG + min(minR, minB);
-            minR = temR;
-            minG = temG;
-            minB = temB;
+            curR = curR + min(minG, minB);
+            curB = curB + min(minR, minG);
+            curG = curG + min(minR, minB);
         }
-        else{
-            minR = curR;
-            minG = curG;
-            minB = curB;
-        }
+        minR = curR;
+        minG = curG;
+        minB = curB;
     }
-    ret = min(minR, minG);
-    ret = min(ret, minB);
-    cout << ret;
+    cout << min(min(minR, minG), minB);
 }
